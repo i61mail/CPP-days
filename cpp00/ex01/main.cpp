@@ -22,7 +22,7 @@ void	displayinfos(Contact contact, PhoneBook phonebook, int index)
 	}
 	phonebook.getContact(contact, index);
 	std::cout << "Extra informations :\n";
-        std::cout << "First name == " << contact.getfirstname() << "\n";
+	std::cout << "First name == " << contact.getfirstname() << "\n";
 	std::cout << "Last name == " << contact.getlastname() << "\n";
 	std::cout << "Nickname == " << contact.getnickname() << "\n";
 	std::cout << "Phone number == " << contact.getphonenumber() << "\n";
