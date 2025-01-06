@@ -6,8 +6,8 @@ std::string	check_input(std::string input)
 
 	if (input.length() > 9)
 	{
-		temp = input.substr(0, 9);
-		temp[8] = '.';
+		temp = input.substr(0, 10);
+		temp[9] = '.';
         	return (temp);
     	}
    	return (input);
@@ -75,12 +75,12 @@ void	DisplayContactTable(PhoneBook phonebook)
 		std::cout << "*";
 		std::cout << std::setw(10);
 		phonebook.getContact(contact, i);
-		std::cout << i + 1 << "| ";
-		std::cout << std::setw(9);
-		std::cout << check_input(contact.getfirstname()) << "| ";
-		std::cout << std::setw(9);
-		std::cout << check_input(contact.getlastname()) << "| ";
-		std::cout << std::setw(9);
+		std::cout << i + 1 << "|";
+		std::cout << std::setw(10);
+		std::cout << check_input(contact.getfirstname()) << "|";
+		std::cout << std::setw(10);
+		std::cout << check_input(contact.getlastname()) << "|";
+		std::cout << std::setw(10);
 		std::cout << check_input(contact.getnickname()) << "*\n";
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << "\n";
 		i++;
