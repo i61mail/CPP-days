@@ -47,7 +47,7 @@ int	Contact::addlastname(std::string lastname)
 	int i = 0;
 	if (lastname[0] == '\t')
 		lastname = trim(lastname, '\t');
-	else
+	else if (lastname[0] == ' ')
 		lastname = trim(lastname, ' ');
 	while (lastname[i])
 	{
@@ -77,7 +77,7 @@ int	Contact::addnickname(std::string nickname)
 	int	i = 0;
 	if (nickname[0] == '\t')
 		nickname = trim(nickname, '\t');
-	else
+	else if (nickname[0] == ' ')
 		nickname = trim(nickname, ' ');
 	while (nickname[i])
 	{
@@ -106,7 +106,7 @@ int	Contact::addphonenumber(std::string phonenumber)
 	int i = 0;
 	if (phonenumber[0] == '\t')
 		phonenumber = trim(phonenumber, '\t');
-	else
+	else if (phonenumber[0] == ' ')
 		phonenumber = trim(phonenumber, ' ');
 	while (phonenumber[i])
 	{
@@ -131,7 +131,7 @@ int	Contact::adddarkestsecret(std::string darkestsecret)
 	int i = 0;
 	if (darkestsecret[0] == '\t')
 		darkestsecret = trim(darkestsecret, '\t');
-	else
+	else if (darkestsecret[0] == ' ')
 		darkestsecret = trim(darkestsecret, ' ');
 	while (darkestsecret[i])
 	{
