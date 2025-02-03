@@ -21,7 +21,7 @@ int	PhoneBook::contact_index(void)
 	return (this->index);
 }
 
-void	PhoneBook::getContact(Contact &contact, int index)
+void	PhoneBook::getContact(Contact *contact, int index)
 {
-	contact = this->contact[index];
+	*contact = this->contact[index];
 }
