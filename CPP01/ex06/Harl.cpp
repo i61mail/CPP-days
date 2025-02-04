@@ -14,20 +14,31 @@ Harl::Harl()
 
 void    Harl::complain( std::string level )
 {
-    if (level != "DEBUG" && level != "INFO" && level != "WARNING" && level != "ERROR")
-    {
-        std::cerr << "Unknown level" << std::endl;
-        return ;
-    }
     int i = 0;
     while (i < 4)
     {
         if (level == this->level[i])
         {
-            (this->*funcPtr[i])();
-            return ;
+            break ;
         }
         i++;
+    }
+    switch (i)
+    {
+        case 0:
+            this->debug();
+            //fall through
+        case 1:
+            this->info();
+            //fall through
+        case 2:
+            this->warning();
+            //fall through
+        case 3:
+            this->error();
+            break ;
+        default:
+            std::cout << "Unknown level" << std::endl;
     }
 }
 
