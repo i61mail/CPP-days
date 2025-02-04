@@ -15,14 +15,8 @@ Harl::Harl()
 void    Harl::complain( std::string level )
 {
     int i = 0;
-    while (i < 4)
-    {
-        if (level == this->level[i])
-        {
-            break ;
-        }
+    while (i < 4 && level != this->level[i])
         i++;
-    }
     switch (i)
     {
         case 0:
