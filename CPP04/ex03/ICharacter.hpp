@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 17:31:32 by isrkik            #+#    #+#             */
-/*   Updated: 2025/02/23 17:38:50 by isrkik           ###   ########.fr       */
+/*   Created: 2025/03/05 10:26:22 by isrkik            #+#    #+#             */
+/*   Updated: 2025/03/05 10:27:28 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef ICHARACTER_HPP
+#define ICHARACTER_HPP
 
-//check new if failed
+#include <iostream>
+#include "AMateria.hpp"
 
-int main()
+class ICharacter
 {
-    Zombie zombie("Zombie");
-    zombie.announce();
+    public:
+        virtual ~ICharacter() {}
+        virtual std::string const & getName() const = 0;
+        virtual void equip(AMateria* m) = 0;
+        virtual void unequip(int idx) = 0;
+        virtual void use(int idx, ICharacter& target) = 0;
+};
 
-    Zombie  *zombiePointer;
-    zombiePointer = newZombie("ZombiePointer");
-    zombiePointer->announce();
-    delete(zombiePointer);
-
-    randomChump("zombieRandom");
-    return (0);
-}
+#endif

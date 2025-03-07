@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 17:31:32 by isrkik            #+#    #+#             */
-/*   Updated: 2025/02/23 17:38:50 by isrkik           ###   ########.fr       */
+/*   Created: 2025/03/05 11:00:39 by isrkik            #+#    #+#             */
+/*   Updated: 2025/03/05 11:01:55 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef IMATERIASOURCE_HPP
+#define IMATERIASOURCE_HPP
 
-//check new if failed
+#include <iostream>
+#include "AMateria.hpp"
 
-int main()
+class IMateriaSource
 {
-    Zombie zombie("Zombie");
-    zombie.announce();
+    public:
+        virtual ~IMateriaSource() {}
+        virtual void learnMateria(AMateria*) = 0;
+        virtual AMateria* createMateria(std::string const & type) = 0;
+};
 
-    Zombie  *zombiePointer;
-    zombiePointer = newZombie("ZombiePointer");
-    zombiePointer->announce();
-    delete(zombiePointer);
-
-    randomChump("zombieRandom");
-    return (0);
-}
+#endif

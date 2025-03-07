@@ -4,9 +4,10 @@ int main()
 {
     Zombie *multipZombie;
 
-    multipZombie = zombieHorde(7, "Zombies");
+    int N = -45;
+    multipZombie = zombieHorde(N, "Zombies");
     int i = 0;
-    while (i < 7)
+    while (i < N)
     {
         multipZombie[i].announce();
         i++;

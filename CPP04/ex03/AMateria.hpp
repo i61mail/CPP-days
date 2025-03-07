@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 17:31:32 by isrkik            #+#    #+#             */
-/*   Updated: 2025/02/23 17:38:50 by isrkik           ###   ########.fr       */
+/*   Created: 2025/03/05 10:23:04 by isrkik            #+#    #+#             */
+/*   Updated: 2025/03/05 17:25:59 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef AMATERIA_HPP
+#define AMATERIA_HPP
 
-//check new if failed
+#include <iostream>
+#include "ICharacter.hpp"
 
-int main()
+class AMateria
 {
-    Zombie zombie("Zombie");
-    zombie.announce();
+    protected :
+    
+    public :
+        AMateria(std::string const & type);
+        std::string const & getType() const; //Returns the materia type
+        virtual AMateria* clone() const = 0;
+        virtual void use(ICharacter& target);
+};
 
-    Zombie  *zombiePointer;
-    zombiePointer = newZombie("ZombiePointer");
-    zombiePointer->announce();
-    delete(zombiePointer);
-
-    randomChump("zombieRandom");
-    return (0);
-}
+#endif
