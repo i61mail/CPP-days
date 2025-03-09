@@ -5,11 +5,11 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 NAME = ./a.out
 
 EXEC_MAN = main.cpp AMateria.cpp ICharacter.cpp IMateriaSource.cpp \
-
+			Character.cpp MateriaSource.cpp Ice.cpp Cure.cpp
 
 OBJ_MAN = ${EXEC_MAN:.cpp=.o}
 
-%.o : %.cpp AMateria.hpp ICharacter.hpp IMateriaSource.hpp
+%.o : %.cpp AMateria.hpp ICharacter.hpp IMateriaSource.hpp Character.hpp MateriaSource.hpp Ice.hpp Cure.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
