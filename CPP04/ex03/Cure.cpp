@@ -21,7 +21,6 @@ Cure::Cure(const Cure &obj) : AMateria(obj)
 Cure &Cure::operator=(const Cure &obj)
 {
     std::cout << "assignment operator is called" << std::endl;
-    this->type = obj.type;
     return (*this);
 }
 

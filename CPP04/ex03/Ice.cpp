@@ -6,7 +6,7 @@ Ice::Ice()
     this->type = "ice";
 }
 
-Ice::Ice(std::string type)
+Ice::Ice(std::string type) // removed
 {
     std::cout << "Ice constructor is called" << std::endl;
     this->type = type;
@@ -21,7 +21,6 @@ Ice::Ice(const Ice &obj) : AMateria(obj)
 Ice &Ice::operator=(const Ice &obj)
 {
     std::cout << "assignment operator is called" << std::endl;
-    this->type = obj.type;
     return (*this);
 }
 

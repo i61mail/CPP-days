@@ -30,11 +30,8 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &obj)
     {
         for (int i = 0; i < 4; i++)
         {
-            if (materiaSource[i])
-            {
-                delete materiaSource[i];
-                materiaSource[i] = NULL;
-            }
+            delete materiaSource[i];
+            materiaSource[i] = NULL;
         }
         this->type = obj.type;
         for (int i = 0; i < 4; i++)
@@ -56,8 +53,9 @@ void    MateriaSource::learnMateria(AMateria *learn)
 {
     if (learn != NULL && count < 4)
     {
-        materiaSource[count] = learn;
+        materiaSource[count] = learn->clone();
         count++;
+        delete learn;
     }
     else if (learn != NULL)
         delete learn;
