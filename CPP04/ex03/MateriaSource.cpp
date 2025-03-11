@@ -7,15 +7,14 @@ MateriaSource::MateriaSource() : count(0)
         materiaSource[i] = NULL;
 }
 
-MateriaSource::MateriaSource(std::string type) : count(0)
+MateriaSource::MateriaSource(int count) : count(count)
 {
     std::cout << "MateriaSource constructor is called" << std::endl;
-    (void)type;
     for (int i = 0; i < 4; i++)
         materiaSource[i] = NULL;
 }
 
-MateriaSource::MateriaSource(const MateriaSource &obj)
+MateriaSource::MateriaSource(const MateriaSource &obj) : IMateriaSource(obj)
 {
     std::cout << "MateriaSource copy constructor is called" << std::endl;
     for (int i = 0; i < 4; i++)
@@ -33,7 +32,6 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &obj)
             delete materiaSource[i];
             materiaSource[i] = NULL;
         }
-        this->type = obj.type;
         for (int i = 0; i < 4; i++)
         {
             if (obj.materiaSource[i])

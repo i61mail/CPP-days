@@ -7,8 +7,10 @@
 class IMateriaSource
 {
     public:
-    // cannon
-        virtual ~IMateriaSource() {}
+        IMateriaSource();
+        IMateriaSource(const IMateriaSource &obj);
+        IMateriaSource &operator=(const IMateriaSource &obj);
+        virtual ~IMateriaSource();
         virtual void learnMateria(AMateria*) = 0;
         virtual AMateria* createMateria(std::string const & type) = 0;
 };

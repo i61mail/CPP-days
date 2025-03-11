@@ -6,12 +6,6 @@ Cure::Cure()
     this->type = "cure";
 }
 
-Cure::Cure(std::string type)
-{
-    std::cout << "Cure constructor is called" << std::endl;
-    this->type = type;
-}
-
 Cure::Cure(const Cure &obj) : AMateria(obj)
 {
     std::cout << "Cure copy constructor is called" << std::endl;
@@ -21,6 +15,7 @@ Cure::Cure(const Cure &obj) : AMateria(obj)
 Cure &Cure::operator=(const Cure &obj)
 {
     std::cout << "assignment operator is called" << std::endl;
+    (void)obj;
     return (*this);
 }
 

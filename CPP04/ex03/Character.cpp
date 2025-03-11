@@ -17,7 +17,7 @@ Character::Character(std::string name)
         materia[i] = NULL;
 }
 
-Character::Character(const Character &obj)
+Character::Character(const Character &obj) : ICharacter(obj)
 {
     std::cout << "Character copy constructor is called " << std::endl;
     for (int i = 0; i < 4; i++)
