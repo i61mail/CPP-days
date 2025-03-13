@@ -2,7 +2,6 @@
 #define CHARACTER_HPP
 
 #include "ICharacter.hpp"
-#include <iostream>
 
 struct MateriaNode
 {
