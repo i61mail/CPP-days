@@ -8,7 +8,7 @@ Dog::Dog()
     int i = 0;
     while (i < 100)
     {
-        ideas[i] = "Dog idea ";
+        ideas[i] = "Dog idea";
         i++;
     }
     this->idea = new Brain(ideas);
@@ -22,7 +22,7 @@ Dog::Dog(std::string type)
     int i = 0;
     while (i < 100)
     {
-        ideas[i] = "Dog idea ";
+        ideas[i] = "Dog idea";
         i++;
     }
     this->idea = new Brain(ideas);
@@ -38,8 +38,12 @@ Dog::Dog(const Dog &obj) : Animal(obj)
 Dog &Dog::operator=(const Dog &obj)
 {
     std::cout << "Dog assignment operator is called" << std::endl;
-    this->type = obj.type;
-    this->idea = new Brain(*obj.idea);
+    if (this != &obj)
+    {
+        this->type = obj.type;
+        delete this->idea;
+        this->idea = new Brain(*obj.idea);
+    }
     return (*this);
 }
 
@@ -51,5 +55,5 @@ Dog::~Dog()
 
 void Dog::makeSound() const
 {
-    std::cout << "Dog sound is called" << std::endl;
+    std::cout << "Dog sound" << std::endl;
 }

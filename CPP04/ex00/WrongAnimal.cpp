@@ -3,7 +3,7 @@
 WrongAnimal::WrongAnimal()
 {
     std::cout << "WrongAnimal default constructor is called" << std::endl;
-    this->type = "WrongAnimal Empty";
+    this->type = "WrongAnimal";
 }
 
 WrongAnimal::WrongAnimal(std::string type)
@@ -32,7 +32,7 @@ WrongAnimal::~WrongAnimal()
 
 void    WrongAnimal::makeSound() const
 {
-    std::cout << "WrongAnimal Sound hh" << std::endl;
+    std::cout << "WrongAnimal Sound" << std::endl;
 }
 
 std::string WrongAnimal::getType() const

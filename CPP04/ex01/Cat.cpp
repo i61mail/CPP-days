@@ -38,8 +38,13 @@ Cat::Cat(const Cat &obj) : Animal(obj)
 Cat &Cat::operator=(const Cat &obj)
 {
     std::cout << "Cat assignment operator is called" << std::endl;
-    this->type = obj.type;
-    this->idea = new Brain(*obj.idea);
+    if (this != &obj)
+    {
+        this->type = obj.type;
+        delete this->idea;
+        this->idea = new Brain(*obj.idea);
+
+    }
     return (*this);
 }
 
@@ -51,5 +56,5 @@ Cat::~Cat()
 
 void Cat::makeSound() const
 {
-    std::cout << "Cat sound is called" << std::endl;
+    std::cout << "Cat sound" << std::endl;
 }
