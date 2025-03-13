@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "AMateria.hpp"
+#include "Character.hpp"
 
 class Ice : public AMateria
 {

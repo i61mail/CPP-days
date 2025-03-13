@@ -27,6 +27,7 @@ Cure::~Cure()
 AMateria *Cure::clone() const
 {
     AMateria *newCure = new Cure();
+    Character::deleteMateria(newCure);
     return (newCure);
 }
 

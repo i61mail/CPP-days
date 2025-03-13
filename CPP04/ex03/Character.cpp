@@ -74,11 +74,34 @@ void Character::equip(AMateria *m)
     }
 }
 
+MateriaNode *Character::materiaList = NULL;
+
+void Character::deleteMateria(AMateria *m)
+{
+    MateriaNode *newNode = new MateriaNode;
+    newNode->m = m;
+    newNode->next = materiaList;
+    materiaList = newNode;
+}
+
+void Character::deleteMateriaList()
+{
+    MateriaNode *current = materiaList;
+    MateriaNode *next;
+
+    while (current != NULL)
+    {
+        next = current->next;
+        delete current->m;
+        delete current;
+        current = next;
+    }
+    materiaList = NULL;
+}
+
 void Character::unequip(int idx)
 {
     if (idx >= 0 && idx < 4 && materia[idx] != NULL) {
-        // collect materia[idx]
-        // be careful of re-equip
         materia[idx] = NULL;
     }
 }

@@ -4,9 +4,16 @@
 #include "ICharacter.hpp"
 #include <iostream>
 
+struct MateriaNode
+{
+    AMateria *m;
+    MateriaNode *next;
+};
+
 class Character : public ICharacter
 {
-    protected :
+    private :
+        static MateriaNode *materiaList;
         std::string name;
         AMateria *materia[4];
     public :
@@ -16,9 +23,11 @@ class Character : public ICharacter
         Character& operator=(const Character &obj);
         ~Character();
         std::string const & getName() const;
+        static void deleteMateria(AMateria *m);
         void equip(AMateria* m);
         void unequip(int idx);
         void use(int idx, ICharacter& target);
+        static void deleteMateriaList();
 };
 
 #endif

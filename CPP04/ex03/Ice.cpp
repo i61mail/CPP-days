@@ -27,6 +27,7 @@ Ice::~Ice()
 AMateria *Ice::clone() const
 {
     AMateria *newIce = new Ice();
+    Character::deleteMateria(newIce);
     return (newIce);
 }
 

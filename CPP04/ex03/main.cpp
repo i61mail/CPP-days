@@ -1,4 +1,3 @@
-
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 #include "IMateriaSource.hpp"
@@ -31,6 +30,7 @@ int main()
     me->use(0, *bob);
     me->use(1, *bob);
 
+    Character::deleteMateriaList();
     delete bob;
     delete me;
     delete src;
