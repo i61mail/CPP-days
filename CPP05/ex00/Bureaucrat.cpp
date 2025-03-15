@@ -1,13 +1,17 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : name("default")
+Bureaucrat::Bureaucrat() : name("default"), grade(1)
 {
     std::cout << "default constructor is called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(int grade) : name("default")
+Bureaucrat::Bureaucrat(const std::string _name, int grade) : name(_name)
 {
-    std::cout << "parameter constructor is called" << std::endl;
+    std::cout << "constructor is called" << std::endl;
+    if (grade < 1)
+        throw GradeTooHighException();
+    else if (grade > 150)
+        throw GradeTooLowException();
     this->grade = grade;
 }
 
@@ -42,10 +46,28 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
-    this->grade--;
+    if (--grade <= 0)
+        throw GradeTooHighException();
 }
 
 void Bureaucrat::decrementGrade()
 {
-    this->grade++;
+    if (++grade >= 151)
+        throw GradeTooLowException();
+}
+
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return "grade too high";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return "grade too low";
+}
+
+std::ostream &operator<<(std::ostream &out, const Bureaucrat &obj)
+{
+    out << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
+    return (out);
 }
