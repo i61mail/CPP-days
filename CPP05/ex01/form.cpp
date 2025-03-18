@@ -71,3 +71,11 @@ std::ostream &operator<<(std::ostream &out, const Form &obj)
     out << obj.getName() << ", form isSigned " << obj.getIsSigned();
     return (out);
 }
+
+void    Form::beSigned(Bureaucrat &obj)
+{
+    if (obj.getGrade() <= this->gradeSi)
+        this->isSigned = true;
+    else
+        throw GradeTooLowException();
+}
