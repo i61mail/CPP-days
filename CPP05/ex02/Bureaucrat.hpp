@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -33,7 +33,8 @@ class Bureaucrat
                 virtual const char *what() const throw();
         };
 
-        void    signForm(Form &obj);
+        void    signAForm(AForm &obj);
+        void    executeForm(AForm const & form);
 
 };
 
