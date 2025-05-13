@@ -4,7 +4,7 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-class Form : public Bureaucrat
+class Form 
 {
     private :
         const std::string name;
@@ -23,13 +23,13 @@ class Form : public Bureaucrat
         bool    getIsSigned() const;
         void    beSigned(Bureaucrat &obj);
 
-        class GradeTooHighException : public std::exception
+        class GradeTooHighException : public Bureaucrat::GradeTooHighException
         {
             public :
                 virtual const char *what() const throw();
         };
 
-        class GradeTooLowException : public std::exception
+        class GradeTooLowException : public Bureaucrat::GradeTooLowException
         {
             public :
                 virtual const char *what() const throw();

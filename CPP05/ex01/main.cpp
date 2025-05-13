@@ -6,22 +6,23 @@ int main()
     {
         std::cout << "*****************************" << std::endl;
         std::cout << std::endl;
-        Bureaucrat first("name", 2);
-        Form obj("ismail" , true, 150, 1);
-        obj.beSigned(first);
-        first.signForm(obj);
-        std::cout << obj << std::endl;
-        Form obj1("i61mail", false, 1, 1);
-        first.signForm(obj1);
-        std::cout << obj1 << std::endl;
+
+        Bureaucrat bur("le directeur", 2);
+        Form paper("paper" , false, 150, 1);
+        bur.signForm(paper);
+
+        std::cout << paper << std::endl;
+
+        Form paper1("paper1", false, 1, 1);
+        bur.signForm(paper1);
+        std::cout << paper1 << std::endl;
     }
 
-    /*    catch exceptions    */
-    catch (Form::GradeTooHighException &e)
+    catch (Bureaucrat::GradeTooHighException &e)
     {
         std::cout << e.what() << std::endl;
     }
-    catch (Form::GradeTooLowException &e)
+    catch (Bureaucrat::GradeTooLowException &e)
     {
         std::cout << e.what() << std::endl;
     }

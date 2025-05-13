@@ -41,12 +41,11 @@ int main()
         bu.executeForm(presi);
     }
 
-    /*    catch exceptions    */
-    catch (AForm::GradeTooHighException &e)
+    catch (Bureaucrat::GradeTooHighException &e)
     {
         std::cout << e.what() << std::endl;
     }
-    catch (AForm::GradeTooLowException &e)
+    catch (Bureaucrat::GradeTooLowException &e)
     {
         std::cout << e.what() << std::endl;
     }

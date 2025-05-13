@@ -10,41 +10,49 @@ int main()
     try
     {
         Intern someRandomIntern;
+        
         AForm* rrf;
-
+        Bureaucrat b("Boss", 1);
         /*    test with a form that exists    */
-        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-        Bureaucrat b("Bender", 1);
-        b.signAForm(*rrf);
-        b.executeForm(*rrf);
-        delete rrf;
+        {
+            rrf = someRandomIntern.makeForm("robotomy request", "Bur1");
+            if (!rrf)
+                return 1;
+            b.signAForm(*rrf);
+            b.executeForm(*rrf);
+            delete rrf;
+        }
+        // {
+        //     rrf = someRandomIntern.makeForm("presidential pardon", "Bur2");
+        //     if (!rrf)
+        //         return 1;
+        //     b.signAForm(*rrf);
+        //     b.executeForm(*rrf);
+        //     delete rrf;
+        // }
 
-        std::cout << std::endl;
-        rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
-        b.signAForm(*rrf);
-        b.executeForm(*rrf);
-        delete rrf;
-
-        std::cout << std::endl;
-        rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
-        b.signAForm(*rrf);
-        b.executeForm(*rrf);
-        delete rrf;
-
-        std::cout << std::endl;
-        /*    test with a form that doesn't exist    */
-        rrf = someRandomIntern.makeForm("nonexistent form", "Bender");
-        delete rrf;
+        // {
+        //     rrf = someRandomIntern.makeForm("shrubbery creation", "Bur3");
+        //     if (!rrf)
+        //         return 1;
+        //     b.signAForm(*rrf);
+        //     b.executeForm(*rrf);
+        //     delete rrf;
+        // }
+        // {
+        //     /*    test with a form that doesn't exist    */
+        //     rrf = someRandomIntern.makeForm("nonexistent form", "Bender");
+        //     delete rrf;
+        // }
     }
 
-    /*    catch exceptions    */
-    catch (AForm::GradeTooHighException &e)
+    catch (Bureaucrat::GradeTooHighException &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     }
-    catch (AForm::GradeTooLowException &e)
+    catch (Bureaucrat::GradeTooLowException &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     }
 
     return (0);

@@ -15,7 +15,7 @@ name(_name), isSigned(_isSigned), gradeSi(_gradeSi), gradeEx(_gradeEx)
         throw GradeTooLowException();
 }
 
-Form::Form(const Form &obj) : Bureaucrat() ,gradeSi(obj.gradeSi), gradeEx(obj.gradeEx)
+Form::Form(const Form &obj) : gradeSi(obj.gradeSi), gradeEx(obj.gradeEx)
 {
     std::cout << "Form copy constructor is called" << std::endl;
     *this = obj;

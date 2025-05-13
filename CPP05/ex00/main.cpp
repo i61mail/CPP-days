@@ -15,14 +15,12 @@ int main()
             std::cout << obj1 << std::endl;
         }
         // {
-        //     std::cout << std::endl;
         //     std::cout << "*****************************" << std::endl;
         //     std::cout << std::endl;
         //     Bureaucrat obj("ismail", 150);
         //     obj.decrementGrade();
         // }
         // {
-        //     std::cout << std::endl;
         //     std::cout << "*****************************" << std::endl;
         //     std::cout << std::endl;
         //     Bureaucrat obj("ismail", 1);
@@ -30,7 +28,6 @@ int main()
         // }
     }
 
-    /*    catch exceptions    */
     catch (Bureaucrat::GradeTooHighException &e)
     {
         std::cout << e.what() << std::endl;

@@ -6,7 +6,7 @@ RobotomyRequestForm::RobotomyRequestForm()
     this->target = "RobotomyRequestForm";
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string _target) : AForm("RobotomyRequestForm", false, 72, 45), target(_target)
+RobotomyRequestForm::RobotomyRequestForm(std::string _target) : AForm("RobotomyRequestForm", false, 0, 45), target(_target)
 {
     // std::cout << "RobotomyRequestForm constructor is called" << std::endl;
 }

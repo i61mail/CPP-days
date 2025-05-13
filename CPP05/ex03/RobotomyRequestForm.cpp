@@ -42,5 +42,5 @@ void    RobotomyRequestForm::PureExecute() const
     if (success)
         std::cout << getTarget() << " has been robotomized successfully!" << std::endl;
     else
-        std::cout << "Robotomy failed for " << getTarget() << "!" << std::endl;
+        std::cerr << "Robotomy failed for " << getTarget() << "!" << std::endl;
 }

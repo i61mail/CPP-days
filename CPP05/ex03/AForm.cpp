@@ -1,6 +1,6 @@
 #include "AForm.hpp"
 
-AForm::AForm() : name("default"), isSigned(false), gradeSi(1), gradeEx(1)
+AForm::AForm() : name("Form"), isSigned(false), gradeSi(1), gradeEx(1)
 {
     // std::cout << "AForm default constructor is called" << std::endl;
 }
@@ -25,7 +25,7 @@ AForm::AForm(const std::string _name, const int _gradeSi, const int _gradeEx) : 
         throw GradeTooLowException();
 }
 
-AForm::AForm(const AForm &obj) : Bureaucrat() ,gradeSi(obj.gradeSi), gradeEx(obj.gradeEx)
+AForm::AForm(const AForm &obj) : gradeSi(obj.gradeSi), gradeEx(obj.gradeEx)
 {
     // std::cout << "AForm copy constructor is called" << std::endl;
     *this = obj;

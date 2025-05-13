@@ -37,19 +37,12 @@ Intern &Intern::operator=(const Intern &obj)
 Intern::~Intern()
 {
     // std::cout << "Intern destructor called" << std::endl;
-    AForm *form;
-
-    for (int i = 0; i < 3; i++)
-    {
-        form = (this->*formFunctions[i])(forms[i]);
-        if (form)
-            delete form;
-    }
 }
 
 AForm *Intern::createRobotomyRequest(std::string target)
 {
     return new RobotomyRequestForm(target);
+
 }
 
 AForm *Intern::createPresidentialPardon(std::string target)
@@ -64,14 +57,24 @@ AForm *Intern::createShrubberyCreation(std::string target)
 
 AForm *Intern::makeForm(std::string formName, std::string formTarget)
 {
+    AForm *test = NULL;
+
     for (int i = 0; i < 3; i++)
     {
         if (formName == forms[i])
         {
             std::cout << "Intern creates " << formName << std::endl;
-            return (this->*formFunctions[i])(formTarget);
+            try
+            {
+                test = (this->*formFunctions[i])(formTarget);
+            }
+            catch(const AForm::GradeTooHighException &e)
+            {
+                std::cerr << e.what() << std::endl;
+            }
+            return test;
         }
     }
-    std::cout << "Intern cannot create " << formName << std::endl;
+    std::cerr << "Intern cannot create " << formName << std::endl;
     return NULL;
 }

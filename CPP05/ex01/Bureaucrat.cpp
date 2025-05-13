@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-Bureaucrat::Bureaucrat() : name("default"), grade(1)
+Bureaucrat::Bureaucrat() : name("Bureaucrat"), grade(1)
 {
     std::cout << "Bureaucrat default constructor is called" << std::endl;
 }
@@ -75,6 +75,8 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &obj)
 
 void    Bureaucrat::signForm(Form &obj)
 {
+    if (obj.getIsSigned() == true)
+        return;
     try
     {
         obj.beSigned(*this);
