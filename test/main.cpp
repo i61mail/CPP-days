@@ -1,5 +1,11 @@
 #include "class.hpp"
 
+
+void    f()
+{
+    std::cout << "hna" << std::endl;
+}
+
 int main()
 {
     // Printer obj(10);
@@ -35,12 +41,22 @@ int main()
     //     std::cout << "string is odd" << std::endl;
 
 
-    double x = 5.2, y = 2.3;
+    // double x = 5.2, y = 2.3;
 
-    double c = static_cast<int>(x) / static_cast<int>(y);
+    // double c = static_cast<int>(x) / static_cast<int>(y);
 
-    // std::cout << "x size " << sizeof(x) << std::endl;
-    std::cout << "C = " << c << std::endl;
+    // // std::cout << "x size " << sizeof(x) << std::endl;
+    // std::cout << "C = " << c << std::endl;
+
+    try
+    {
+        f();
+    }
+    catch(int b)
+    {
+        std::cerr << "here" << std::endl;
+    }
+    
 
 
     return (0);

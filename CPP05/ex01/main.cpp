@@ -13,7 +13,7 @@ int main()
 
         std::cout << paper << std::endl;
 
-        Form paper1("paper1", false, 1, 1);
+        Form paper1("paper1", false, 2, 1);
         bur.signForm(paper1);
         std::cout << paper1 << std::endl;
     }

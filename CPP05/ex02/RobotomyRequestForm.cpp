@@ -36,9 +36,13 @@ std::string RobotomyRequestForm::getTarget() const
 
 void    RobotomyRequestForm::PureExecute() const
 {
+    static int i;
+
     std::cout << "Making some drilling noises..." << std::endl;
 
-    bool success = ((long)&target % 2) == 0;
+    if (i > 10)
+        i = 0;
+    bool success = (i++ % 2) == 0;
     if (success)
         std::cout << getTarget() << " has been robotomized successfully!" << std::endl;
     else
