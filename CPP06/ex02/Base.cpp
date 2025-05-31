@@ -62,8 +62,7 @@ Base *identify(Base& p)
 {
     try
     {
-        A &a = dynamic_cast<A&>(p);
-        (void)a;
+        dynamic_cast<A&>(p);
         std::cout << "Type A" << std::endl;
     }
     catch (std::exception &e)
@@ -72,21 +71,21 @@ Base *identify(Base& p)
     }
     try
     {
-        B &b = dynamic_cast<B&>(p);
-        (void)b;
+        dynamic_cast<B&>(p);
         std::cout << "Type B" << std::endl;
     }
     catch (std::exception &e)
     {
+        std::cout << "Not type B" << std::endl;
     }
     try
     {
-        C &c = dynamic_cast<C&>(p);
-        (void)c;
+        dynamic_cast<C&>(p);
         std::cout << "Type C" << std::endl;
     }
     catch (std::exception &e)
     {
+        std::cout << "Not type C" << std::endl;
     }
     return &p;
 }

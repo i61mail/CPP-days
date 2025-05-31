@@ -48,14 +48,10 @@ int main()
     // // std::cout << "x size " << sizeof(x) << std::endl;
     // std::cout << "C = " << c << std::endl;
 
-    try
-    {
-        f();
-    }
-    catch(int b)
-    {
-        std::cerr << "here" << std::endl;
-    }
+    int a = 10;
+    int b = 3;
+
+    std::cout << double {a} / b << std::endl;
     
 
 

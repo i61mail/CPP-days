@@ -28,60 +28,53 @@ static ScalarConverter::Type getType(const std::string &literal)
     if (literal == "nan" || literal == "nanf" || 
             literal == "+inf" || literal == "+inff" || 
             literal == "-inf" || literal == "-inff")
-            return ScalarConverter::LITERAL;
+        return ScalarConverter::LITERAL;
+    
+    if (literal.length() == 1 && !std::isdigit(literal[0]))
+        return ScalarConverter::CHAR;
             
-        // Handle single ScalarConverter::CHAR
-        if (literal.length() == 1 && !std::isdigit(literal[0]))
-            return ScalarConverter::CHAR;
-            
-        // Handle sign
-        size_t startPos = 0;
-        if (literal[0] == '-' || literal[0] == '+')
-        {
-            startPos = 1;
-            if (literal.length() == 1 || !std::isdigit(literal[1]))
-                return ScalarConverter::INVALID;
-        }
-        // Find decimal point
-        size_t dotPos = literal.find('.');
-        bool hasDot = (dotPos != std::string::npos);
-        
-        // Find 'f' suffix
-        size_t fPos = literal.find('f');
-        bool hasF = (fPos != std::string::npos);
+    size_t startPos = 0;
+    if (literal[0] == '-' || literal[0] == '+')
+    {
+        startPos = 1;
+        if (literal.length() == 1 || !std::isdigit(literal[1]))
+            return ScalarConverter::INVALID;
+    }
 
-        //check if '.' is behind the 'f' && if '.' at the begining followed by 'f'
-        if (dotPos + 1 == fPos || (literal.length() != 1 && literal[0] == '.'))
-            return ScalarConverter::INVALID;
-
-        // Check if 'f' is at the end
-        if (hasF && fPos != literal.length() - 1)
-            return ScalarConverter::INVALID;
-            
-        // Validate all ScalarConverter::CHAR are valid for a number
-        for (size_t i = startPos; i < literal.length(); i++)
-        {
-            if (i == dotPos) // Skip the dot
-                continue;
-            if (i == fPos) // Skip the f at the end
-                continue;
-            if (!std::isdigit(literal[i]))
-                return ScalarConverter::INVALID;
-        }
+    size_t dotPos = literal.find('.');
+    bool hasDot = (dotPos != std::string::npos);
         
-        // Nothing after decimal point
-        if (hasDot && dotPos + 1 == literal.length())
-            return ScalarConverter::INVALID;
-            
-        // Determine type based on dot and 'f'
-        if (!hasDot && !hasF)
-            return ScalarConverter::INT;
-        if ((hasDot && hasF) || (hasF && !hasDot))
-            return ScalarConverter::FLOAT;
-        if (hasDot && !hasF)
-            return ScalarConverter::DOUBLE;
-            
+    size_t fPos = literal.find('f');
+    bool hasF = (fPos != std::string::npos);
+
+    //check if '.' is behind the 'f' && if '.' at the begining followed by 'f'
+    if (dotPos + 1 == fPos || (literal.length() != 1 && literal[0] == '.'))
         return ScalarConverter::INVALID;
+
+    if (hasF && fPos != literal.length() - 1)
+        return ScalarConverter::INVALID;
+        
+    for (size_t i = startPos; i < literal.length(); i++)
+    {
+        if (i == dotPos)
+            continue;
+        if (i == fPos)
+            continue;
+        if (!std::isdigit(literal[i]))
+            return ScalarConverter::INVALID;
+    }
+        
+    if (hasDot && dotPos + 1 == literal.length())
+        return ScalarConverter::INVALID;
+            
+    if (!hasDot && !hasF)
+        return ScalarConverter::INT;
+    if ((hasDot && hasF) || (hasF && !hasDot))
+        return ScalarConverter::FLOAT;
+    if (hasDot && !hasF)
+        return ScalarConverter::DOUBLE;
+            
+    return ScalarConverter::INVALID;
     
 }
 
@@ -101,18 +94,25 @@ static float stringToFloat(const std::string& str)
     return f;
 }
 
-static int stringToInt(const std::string& str)
+static long stringToInt(const std::string& str)
 {
     std::istringstream iss(str);
-    int result;
+    long result;
     iss >> result;
     return result;
+}
+
+bool    checkOverflow(long c)
+{
+    if (c > 2147483647 || c < -2147483648)
+        return true;
+    return false;
+
 }
 
 void ScalarConverter::convert(const std::string &literal)
 {
     Type type = getType(literal);
-    // std::cout << "Type : " << type << std::endl;
     if (type == INVALID)
     {
         std::cout << "char : impossible" << std::endl;
@@ -131,7 +131,7 @@ void ScalarConverter::convert(const std::string &literal)
     }
     else if (type == INT)
     {
-        int c = stringToInt(literal);
+        long c = stringToInt(literal);
         std::cout << "char : ";
         if (c < 0 || c > 127)
             std::cout << "impossible" << std::endl;
@@ -139,7 +139,11 @@ void ScalarConverter::convert(const std::string &literal)
             std::cout << "Non displayable" << std::endl;
         else
             std::cout << "'" << static_cast<char>(c) << "'" << std::endl;
-        std::cout << "int : " << c << std::endl;
+        std::cout << "int : ";
+        if (checkOverflow(c) == true)
+            std::cout << "overflow" << std::endl;
+        else
+            std::cout << c << std::endl;
         std::cout << "float : " << static_cast<float>(c) << ".0f" << std::endl;
         std::cout << "double : " << static_cast<double>(c) << ".0" << std::endl;
     }
@@ -154,7 +158,11 @@ void ScalarConverter::convert(const std::string &literal)
         else
             std::cout << "'" << static_cast<char>(c) << "'" << std::endl;
         std::cout << std::fixed << std::setprecision(1);
-        std::cout << "int : " << static_cast<int>(c) << std::endl;
+        std::cout << "int : ";
+        if (checkOverflow(c) == true)
+            std::cout << "overflow" << std::endl;
+        else
+            std::cout << static_cast<int>(c) << std::endl;
         std::cout << "float : " << c << "f" << std::endl;
         std::cout << "double : " << static_cast<double>(c) << std::endl;
     }
@@ -168,7 +176,11 @@ void ScalarConverter::convert(const std::string &literal)
             std::cout << "Non displayable" << std::endl;
         else
             std::cout << "'" << static_cast<char>(c) << "'" << std::endl;
-        std::cout << "int : " << static_cast<int>(c) << std::endl;
+        std::cout << "int : ";
+        if (checkOverflow(c) == true)
+            std::cout << "overflow" << std::endl;
+        else
+            std::cout << static_cast<int>(c) << std::endl;
         std::cout << std::fixed << std::setprecision(1);
         std::cout << "float : " << static_cast<float>(c) << "f" << std::endl;
         std::cout << "double : " << c << std::endl;

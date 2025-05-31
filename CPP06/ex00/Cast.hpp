@@ -11,9 +11,9 @@ class ScalarConverter
         ScalarConverter();
         ScalarConverter(const ScalarConverter &obj);
         ScalarConverter &operator=(const ScalarConverter &obj);
-        ~ScalarConverter();
-
+        
     public :
+        ~ScalarConverter();
         enum Type
         {
             CHAR,
@@ -23,7 +23,6 @@ class ScalarConverter
             INVALID,
             LITERAL
         };
-        
         static void convert(const std::string &literal);
 };
 

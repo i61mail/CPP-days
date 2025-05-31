@@ -25,6 +25,8 @@ Serializer::~Serializer()
 
 uintptr_t Serializer::serialize(Data* ptr)
 {
+    if (!ptr)
+        return 1;
     return reinterpret_cast<uintptr_t>(ptr);
 }
 
@@ -49,7 +51,11 @@ int main()
     std::cout << "Address of original data: " << &data << std::endl;
 
     uintptr_t raw = Serializer::serialize(&data);
-    std::cout << "Serialized Data (uintptr_t): " << raw << std::endl;
+    if (raw == 1)
+    {
+        std::cout << "NULL passed" << std::endl;
+        return 1;
+    }
 
     Data* deserializedData = Serializer::deserialize(raw);
     std::cout << "Deserialized Data:" << std::endl;
