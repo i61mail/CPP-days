@@ -31,8 +31,7 @@ static ScalarConverter::Type getType(const std::string &literal)
         return ScalarConverter::LITERAL;
     
     if (literal.length() == 1 && !std::isdigit(literal[0]))
-        return ScalarConverter::CHAR;
-            
+        return ScalarConverter::CHAR;    
     size_t startPos = 0;
     if (literal[0] == '-' || literal[0] == '+')
     {
@@ -40,20 +39,18 @@ static ScalarConverter::Type getType(const std::string &literal)
         if (literal.length() == 1 || !std::isdigit(literal[1]))
             return ScalarConverter::INVALID;
     }
-
     size_t dotPos = literal.find('.');
-    bool hasDot = (dotPos != std::string::npos);
-        
+    bool hasDot = true;
+    if (dotPos == std::string::npos)
+        hasDot = false;
+    bool hasF = true;;
     size_t fPos = literal.find('f');
-    bool hasF = (fPos != std::string::npos);
-
-    //check if '.' is behind the 'f' && if '.' at the begining followed by 'f'
+    if (fPos == std::string::npos)
+        hasF = false;
     if (dotPos + 1 == fPos || (literal.length() != 1 && literal[0] == '.'))
         return ScalarConverter::INVALID;
-
     if (hasF && fPos != literal.length() - 1)
         return ScalarConverter::INVALID;
-        
     for (size_t i = startPos; i < literal.length(); i++)
     {
         if (i == dotPos)
@@ -63,19 +60,15 @@ static ScalarConverter::Type getType(const std::string &literal)
         if (!std::isdigit(literal[i]))
             return ScalarConverter::INVALID;
     }
-        
     if (hasDot && dotPos + 1 == literal.length())
         return ScalarConverter::INVALID;
-            
     if (!hasDot && !hasF)
         return ScalarConverter::INT;
     if ((hasDot && hasF) || (hasF && !hasDot))
         return ScalarConverter::FLOAT;
     if (hasDot && !hasF)
         return ScalarConverter::DOUBLE;
-            
     return ScalarConverter::INVALID;
-    
 }
 
 static double stringToDouble(const std::string& str)
