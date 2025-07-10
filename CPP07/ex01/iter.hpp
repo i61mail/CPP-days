@@ -3,27 +3,17 @@
 
 #include <iostream>
 
-template <typename T>
-void iter(T *array, size_t lentgh, void (*f)(T &))
+template <typename T, typename C>
+void iter(T* array, size_t lentgh, C f)
 {
     for (size_t i = 0; i < lentgh; i++)
-    {
         f(array[i]);
-    }
 }
 
 template <typename T>
-void print(T &value)
+void printValue(T &value)
 {
     std::cout << value << std::endl;
 }
-
-template <typename T>
-void change(T &value)
-{
-    value += 1;
-    std::cout << value << std::endl;
-}
-
 
 #endif

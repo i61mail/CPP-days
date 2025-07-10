@@ -3,7 +3,7 @@
 int main()
 {
     int tab[] = {0, 1, 2, 3, 4};
-    iter(tab, sizeof(tab) / (size_t)4, print);
+    iter(tab, sizeof(tab) / (size_t)4, printValue<int>);
 
     char *c = new char[5];
     c[0] = 'a';
@@ -11,7 +11,7 @@ int main()
     c[2] = 'c';
     c[3] = 'd';
     c[4] = 'e';
-    iter(c, 5, change);
+    iter(c, 5, printValue<char>);
     delete[] c;
     return (0);
 }
