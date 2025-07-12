@@ -14,41 +14,34 @@ int main()
         std::cout << "shorspSpan ==  " << sp.shortestSpan() << std::endl;
         std::cout << "longestSpan ==  " << sp.longestSpan() << std::endl;
 
-        //test for extra element than it required
-        // Span elReq(1);
-        // elReq.addNumber(2);
-        // elReq.addNumber(5);
+        /*     No space Left    */
+        Span NoSpaceLeft(1);
+        NoSpaceLeft.addNumber(2);
+        NoSpaceLeft.addNumber(5);
 
 
-        // // test for empty vector
-        // Span empty(4);
-        // empty.longestSpan();
-        // empty.shortestSpan();
+        /*     Empty Vector     */
+        Span empty(4);
+        empty.longestSpan();
+        empty.shortestSpan();
 
-        //test for one element
-        // Span OneElem(2);
+        /*    One Element in the vector    */
+        Span OneElem(2);
 
-        // OneElem.addNumber(5);
-        // OneElem.longestSpan();
-        // OneElem.shortestSpan();
+        OneElem.addNumber(5);
+        OneElem.longestSpan();
+        OneElem.shortestSpan();
         
-        //test for puting numbers at once
-        // std::vector<long> Onetime(10000, 2);
-        // Span    test1(10000);
-
-
-        // test1.addByOnce(Onetime.begin(), Onetime.end());
-        // std::cout << "longestSpan ==  " << test1.longestSpan() << std::endl;
-        // std::cout << "shortestSpan ==  " << test1.shortestSpan() << std::endl;
-        
+        /*   Puting Numbers At Once    */
+        std::vector<long> Onetime(10000, 2);
+        Span    test1(10000);
+        test1.addByOnce(Onetime.begin(), Onetime.end());
+        std::cout << "shortestSpan ==  " << test1.shortestSpan() << std::endl;
+        std::cout << "longestSpan ==  " << test1.longestSpan() << std::endl;
     }
-    catch(Span::noSpaceLeft &e)
+    catch(const char *message)
     {
-        std::cerr << e.what() << std::endl;
-    }
-    catch(Span::noSpanCanBeFound &e)
-    {
-        std::cerr << e.what() << std::endl;
+        std::cerr << message << std::endl;
     }
     
     return 0;

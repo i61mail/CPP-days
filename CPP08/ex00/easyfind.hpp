@@ -3,29 +3,25 @@
 
 #include <iostream>
 #include <vector>
-
-class customException : public std::exception
-{
-    public :
-        virtual const char *what() const throw()
-        {
-            return "No occurence is found";
-        }
-};
+#include <list>
+#include <algorithm>
 
 template <typename T>
-bool easyfind(T& container, int value)
+typename T::iterator easyfind(T& container, int value)
 {
-    std::vector<int>::iterator first = container.begin();
-    std::vector<int>::iterator last = container.end();
+    typename T::iterator it = std::find(container.begin(), container.end(), value);
+    if (it == container.end())
+        throw "No occurence has found";
+    return it;
+}
 
-    while (first != last)
+template <typename S, typename K>
+void    print(S &contPrint, K it)
+{
+    for (; it != contPrint.end(); it++)
     {
-        if (*first == value)
-            return std::cout << "true" << std::endl;;
-        first++;
+        std::cout << *it << std::endl;
     }
-    throw customException();
 }
 
 #endif

@@ -5,7 +5,7 @@
 #include <vector>
 #include <algorithm>
 
-class Span
+class Span // ask for if i need to do a template container or not
 {
     private :
         unsigned int N;
@@ -22,17 +22,6 @@ class Span
         long    shortestSpan();
         long    longestSpan();
         void    addByOnce(std::vector<long>::iterator begin, std::vector<long>::iterator end);
-
-        class noSpaceLeft : public std::exception
-        {
-            public:
-                virtual const char *what() const throw();
-        };
-        class noSpanCanBeFound : public std::exception
-        {
-            public:
-                virtual const char *what() const throw();
-        };
 };
 
 
