@@ -5,7 +5,7 @@
 #include <vector>
 #include <algorithm>
 
-class Span // ask for if i need to do a template container or not
+class Span
 {
     private :
         unsigned int N;
@@ -17,7 +17,6 @@ class Span // ask for if i need to do a template container or not
         Span &operator=(const Span &obj);
         ~Span();
         unsigned int &getN();
-        void    printVector();
         void    addNumber(long n);
         long    shortestSpan();
         long    longestSpan();

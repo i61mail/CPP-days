@@ -32,7 +32,7 @@ int main()
         OneElem.longestSpan();
         OneElem.shortestSpan();
         
-        /*   Puting Numbers At Once    */
+        /*   Putting Numbers At Once    */
         std::vector<long> Onetime(10000, 2);
         Span    test1(10000);
         test1.addByOnce(Onetime.begin(), Onetime.end());

@@ -28,7 +28,7 @@ int main()
     //size of stack
     std::cout << "stack size: " << mustack.size() << std::endl;
 
-    //reverse iterating throigh stack 
+    //reverse iterating through stack 
     MutantStack<int>::reverse_iterator itrebegin = mustack.rbegin();
     MutantStack<int>::reverse_iterator itrend = mustack.rend();
 
@@ -36,19 +36,6 @@ int main()
     {
         std::cout << "stack element: " << *itrebegin << std::endl;
         itrebegin++;
-    }
-
-    //test for copy construction 
-    MutantStack<int> mu(mustack);
-
-    //iterating through stack
-    MutantStack<int>::iterator muitbegin = mu.begin();
-    MutantStack<int>::iterator muitend = mu.end();
-
-    while (muitbegin != muitend)
-    {
-        std::cout << "mu stack element: " << *muitbegin << std::endl;
-        muitbegin++;
     }
     return 0;
 }

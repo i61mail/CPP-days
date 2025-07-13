@@ -36,16 +36,6 @@ unsigned int &Span::getN()
     return this->N;
 }
 
-void    Span::printVector()
-{
-    std::vector<long>::iterator first = container.begin();
-    while (first != container.end())
-    {
-        std::cout << "printing ... " << *first << std::endl;
-        first++;
-    }
-}
-
 void Span::addNumber(long n)
 {
     if (this->container.size() >= this->N)
