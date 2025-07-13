@@ -29,8 +29,8 @@ int main()
     std::cout << "stack size: " << mustack.size() << std::endl;
 
     //reverse iterating through stack 
-    MutantStack<int>::reverse_iterator itrebegin = mustack.rbegin();
-    MutantStack<int>::reverse_iterator itrend = mustack.rend();
+    MutantStack<int>::reverseIterator itrebegin = mustack.rbegin();
+    MutantStack<int>::reverseIterator itrend = mustack.rend();
 
     while (itrebegin != itrend)
     {
