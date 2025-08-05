@@ -3,8 +3,12 @@
 
 bool    BitcoinExchange::readInputFile(std::ifstream &infile)
 {
-    (void)infile;
-    std::cout << "ismail" << std::endl;
+    std::string line;
+
+    std::getline(infile, line);
+    if (line != "data | value")
+        throw "invalid Format";
+    infile.close();
     return true;
 }
 
@@ -24,8 +28,16 @@ int main(int ac, char **av)
             std::cerr << "Error: cannot open file" << std::endl;
             return 1;
         }
-        BitcoinExchange btc;
-        btc.readInputFile(infile);
+        try
+        {
+            BitcoinExchange btc;
+            btc.readInputFile(infile);
+        }
+        catch(const char *e)
+        {
+            std::cerr << e << std::endl;
+        }
+        
     }
     else if (ac > 2)
         std::cerr << "Error: too many args." << std::endl;
