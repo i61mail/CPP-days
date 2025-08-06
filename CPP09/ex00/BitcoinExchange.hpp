@@ -10,6 +10,11 @@
 class BitcoinExchange
 {
     private:
+        std::string date;
+        std::string value;
+        std::string line;
+        double num;
+        std::map<std::string, std::string> Store;
     public:
         BitcoinExchange();
         BitcoinExchange(const BitcoinExchange& obj);
@@ -17,6 +22,10 @@ class BitcoinExchange
         ~BitcoinExchange();
 
         bool    readInputFile(std::ifstream &infile);
+        bool    processDate();
+        bool    processValue();
+        void    badInput();
+        int     checkDB();
 
         
 
