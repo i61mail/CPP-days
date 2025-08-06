@@ -24,3 +24,7 @@ BitcoinExchange::~BitcoinExchange()
     // infile.close();
 }
 
+void    BitcoinExchange::badInput()
+{
+    std::cerr << "Error: bad input => " << line << std::endl;
+}

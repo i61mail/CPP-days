@@ -12,6 +12,47 @@ int    hasTwoDashes(std::string str)
 
 }
 
+void    BitcoinExchange::checkLeap(int ymd)
+{
+    if (ymd % 4 == 0)
+    {
+        //* ila kan divisible b 100, -> not leap ila ida kan divisible b 400
+        if (ymd % 100 == 0)
+        {
+            if (ymd % 400 == 0)
+                leapYear = true; //* divisible by 400 → leap
+            else
+                leapYear = false; //* divisible by 100 but 400 la → not leap
+        }
+        else
+            leapYear = true;       //* divisible by 4 but 100 la → leap
+    }
+    else
+        leapYear = false; //* machi divisible b 4 → not leap
+}
+
+bool    BitcoinExchange::checkDay(int ymd)
+{
+    if (month == 2)
+    {
+        if (ymd < 1 || (ymd > 28 && leapYear == false))
+            return false;
+        else if (ymd < 1 || (ymd > 29 && leapYear == true))
+            return false;
+    }
+    else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11)
+    {
+        if (ymd < 1 || ymd > 30)
+            return false;
+    }
+    else
+    {
+        if (ymd < 1 || ymd > 31)
+            return false;
+    }
+    return true;
+}
+
 bool    BitcoinExchange::processDate()
 {
     if (hasTwoDashes(date) != 2)
@@ -25,8 +66,8 @@ bool    BitcoinExchange::processDate()
     while (std::getline(ss, word, '-'))
     {
         std::istringstream iss(word);
-        int b;
-        if (!(iss >> b) || !iss.eof())
+        int ymd;
+        if (!(iss >> ymd) || !iss.eof())
         {
             badInput();
             return false;
@@ -34,25 +75,25 @@ bool    BitcoinExchange::processDate()
 
         if (i == 0)
         {
-            if (b < 2009 || b > 2025)
+            if (ymd < 2009 || ymd > 2025)
             {
                 badInput();
                 return false;
             }
-            //todo: une fois l3am is valid need to check for leap year
+            checkLeap(ymd);
         }
         else if (i == 1)
         {
-            if (b < 1 || b > 12)
+            if (ymd < 1 || ymd > 12)
             {
                 badInput();
                 return false;
             }
+            month = ymd;
         }
         else if (i == 2)
         {
-            // todo: khasni n39el 3la chher bach n9der n decide wach nhar valid wla la 
-            if (b < 1 || b > 31)
+            if (checkDay(ymd) == false)
             {
                 badInput();
                 return false;
@@ -112,11 +153,6 @@ bool   BitcoinExchange::processValue()
     return true;
 }
 
-void    BitcoinExchange::badInput()
-{
-    std::cerr << "Error: bad input => " << line << std::endl;
-}
-
 int BitcoinExchange::checkDB()
 {
     // todo: need to check data base for values
@@ -168,7 +204,7 @@ int main(int ac, char **av)
             std::cerr << "Error: file is empty." << std::endl;
             return 1;
         }
-        std::ifstream infile(file);
+        std::ifstream infile(file.c_str());
         if (!infile.is_open())
         {
             std::cerr << "Error: cannot open file" << std::endl;
@@ -191,6 +227,3 @@ int main(int ac, char **av)
         std::cerr << "Error: could not open file." << std::endl;
     return 0;
 }
-
-
-// todo: kabisa wla ma3rt
