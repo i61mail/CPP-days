@@ -9,7 +9,6 @@ int    hasTwoDashes(std::string str)
             count++;
     }
     return count;
-
 }
 
 void    BitcoinExchange::checkLeap(int ymd)
@@ -150,6 +149,7 @@ bool   BitcoinExchange::processValue()
         return false;
 
     }
+    this->inputMap[date] = num;
     return true;
 }
 
@@ -169,14 +169,25 @@ void BitcoinExchange::readDB()
         if (std::getline(ss, dateDB, ',') && std::getline(ss, tempValue))
         {
             valueDB = std::atof(tempValue.c_str());
-            Store[dateDB] = valueDB;
+            DBmap[dateDB] = valueDB;
         }
     }
 }
 
-int BitcoinExchange::checkDB()
+float BitcoinExchange::checkDB()
 {
-    
+    std::map<std::string, float>::iterator it = this->DBmap.find(date);
+    if (it != this->DBmap.end())
+        return it->second * this->inputMap[date];
+    else
+    {
+        it = this->DBmap.lower_bound(date);
+        if (it == this->DBmap.begin())
+            return it->second * this->inputMap[date];
+        if (it == this->DBmap.end() || it->first != date)
+            --it;
+        return it->second * this->inputMap[date];
+    }
     return 1;
 }
 
