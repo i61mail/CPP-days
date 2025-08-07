@@ -7,14 +7,15 @@ RPN::RPN()
 
 RPN::RPN(const RPN& obj)
 {
-    (void)obj;
     std::cout << "Copy constructor is called" << std::endl;
+    this->Store = obj.Store;
 }
 
 RPN &RPN::operator=(const RPN &obj)
 {
-    (void)obj;
     std::cout << "Assignment operator is called" << std::endl;
+    if (this != &obj)
+        this->Store = obj.Store;
     return *this;
 }
 
