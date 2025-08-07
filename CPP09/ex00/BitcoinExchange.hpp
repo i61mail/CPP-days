@@ -12,10 +12,12 @@ class BitcoinExchange
     private:
         std::string date;
         std::string value;
+        std::string dateDB;
+        float valueDB;
         std::string line;
-        double num;
+        float num;
         bool leapYear;
-        std::map<std::string, std::string> Store;
+        std::map<std::string, float> Store;
         int     month;
     public:
         BitcoinExchange();
@@ -27,6 +29,7 @@ class BitcoinExchange
         bool    processDate();
         bool    processValue();
         void    badInput();
+        void    readDB();
         int     checkDB();
         void    checkLeap(int ymd);
         bool    checkDay(int ymd);

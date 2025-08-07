@@ -153,14 +153,36 @@ bool   BitcoinExchange::processValue()
     return true;
 }
 
-int BitcoinExchange::checkDB()
+void BitcoinExchange::readDB()
 {
     // todo: need to check data base for values
+    std::ifstream infile("data.csv");
+    if (!infile.is_open())
+        throw "Error: cannot open file";
+    std::string line;
+    if (!std::getline(infile, line))
+        throw "Error: empty data base";
+    while (std::getline(infile, line))
+    {
+        std::stringstream ss(line);
+        std::string tempValue;
+        if (std::getline(ss, dateDB, ',') && std::getline(ss, tempValue))
+        {
+            valueDB = std::atof(tempValue.c_str());
+            Store[dateDB] = valueDB;
+        }
+    }
+}
+
+int BitcoinExchange::checkDB()
+{
+    
     return 1;
 }
 
 bool    BitcoinExchange::readInputFile(std::ifstream &infile)
 {
+    readDB();
     std::getline(infile, line);
 
     if (line != "date | value")
@@ -187,8 +209,7 @@ bool    BitcoinExchange::readInputFile(std::ifstream &infile)
 
         if (processDate() == false)
             continue ;
-        this->Store[date] = value;
-        std::cout << date << " => " << Store[date] << " = " << checkDB() << std::endl;
+        std::cout << date << " => " << num << " = " << checkDB() << std::endl;
     }
     
     return true;
