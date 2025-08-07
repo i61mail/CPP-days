@@ -180,7 +180,6 @@ bool    BitcoinExchange::readInputFile(std::ifstream &infile)
             continue ;
         std::cout << date << " => " << num << " = " << checkDB() << std::endl;
     }
-    
     return true;
 }
 

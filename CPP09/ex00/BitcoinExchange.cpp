@@ -7,21 +7,41 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& obj)
 {
-    (void)obj;
     // std::cout << "Copy constructor is called" << std::endl;
+    this->date = obj.date;
+    this->value = obj.value;
+    this->dateDB = obj.dateDB;
+    this->valueDB = obj.valueDB;
+    this->line = obj.line;
+    this->num = obj.num;
+    this->leapYear = obj.leapYear;
+    this->month = obj.month;
+    this->inputMap = obj.inputMap;
+    this->DBmap = obj.DBmap;
 }
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &obj)
 {
-    (void)obj;
-    // std::cout << "Copy assignment operator" << std::endl;
+    // std::cout << "assignment operator is called" << std::endl;
+    if (this != &obj)
+    {
+        this->date = obj.date;
+        this->value = obj.value;
+        this->dateDB = obj.dateDB;
+        this->valueDB = obj.valueDB;
+        this->line = obj.line;
+        this->num = obj.num;
+        this->leapYear = obj.leapYear;
+        this->month = obj.month;
+        this->inputMap = obj.inputMap;
+        this->DBmap = obj.DBmap;
+    }
     return *this;
 }
 
 BitcoinExchange::~BitcoinExchange()
 {
     // std::cout << "Destructor is called" << std::endl;
-    // infile.close();
 }
 
 void    BitcoinExchange::badInput()
