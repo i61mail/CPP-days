@@ -11,47 +11,6 @@ int    hasTwoDashes(std::string str)
     return count;
 }
 
-void    BitcoinExchange::checkLeap(int ymd)
-{
-    if (ymd % 4 == 0)
-    {
-        //* ila kan divisible b 100, -> not leap ila ida kan divisible b 400
-        if (ymd % 100 == 0)
-        {
-            if (ymd % 400 == 0)
-                leapYear = true; //* divisible by 400 → leap
-            else
-                leapYear = false; //* divisible by 100 but 400 la → not leap
-        }
-        else
-            leapYear = true;       //* divisible by 4 but 100 la → leap
-    }
-    else
-        leapYear = false; //* machi divisible b 4 → not leap
-}
-
-bool    BitcoinExchange::checkDay(int ymd)
-{
-    if (month == 2)
-    {
-        if (ymd < 1 || (ymd > 28 && leapYear == false))
-            return false;
-        else if (ymd < 1 || (ymd > 29 && leapYear == true))
-            return false;
-    }
-    else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11)
-    {
-        if (ymd < 1 || ymd > 30)
-            return false;
-    }
-    else
-    {
-        if (ymd < 1 || ymd > 31)
-            return false;
-    }
-    return true;
-}
-
 bool    BitcoinExchange::processDate()
 {
     if (hasTwoDashes(date) != 2)
@@ -155,7 +114,6 @@ bool   BitcoinExchange::processValue()
 
 void BitcoinExchange::readDB()
 {
-    // todo: need to check data base for values
     std::ifstream infile("data.csv");
     if (!infile.is_open())
         throw "Error: cannot open file";
