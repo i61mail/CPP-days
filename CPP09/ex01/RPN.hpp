@@ -7,6 +7,7 @@ class RPN
 {
     private:
         std::stack<size_t> Store;
+        std::string strNum;
     public:
         RPN();
         RPN(const RPN& obj);
@@ -14,4 +15,5 @@ class RPN
         ~RPN();
 
         void    processString(std::string str);
+        void    makeCalculation(char op);
 };

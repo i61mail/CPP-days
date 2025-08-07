@@ -1,20 +1,47 @@
 #include "RPN.hpp"
 
-void    validString(std::string str)
+void    RPN::makeCalculation(char op)
 {
-    int i = 0;
-    while (str[i])
+    if (Store.size() < 2)
+        throw "Error";
+    size_t a = Store.top();
+    Store.pop();
+    size_t b = Store.top();
+    Store.pop();
+
+    switch (op)
     {
-        if (!isdigit(str[i]) && str[i] != '\\' && str[i] != '-' && str[i] != '+' && str[i] != '*' && str[i] != ' ')
-            throw "Error";
-        
-        i++;
+        case '+': Store.push(b + a); break;
+        case '-': Store.push(b - a); break;
+        case '/': Store.push(b / a); break;
+        case '*': Store.push(b * a); break; 
     }
 }
 
 void    RPN::processString(std::string str)
 {
-    validString(str);
+    size_t i = 0;
+    while (str[i])
+    {
+        if (!std::isdigit(str[i]) && str[i] != '/' && str[i] != '-' && str[i] != '+' && str[i] != '*' && !isspace(str[i]))
+            throw "Error";
+        while (std::isspace(str[i]))
+            i++;
+        if (str[i] == '/' || str[i] == '-' || str[i] == '+' || str[i] == '*')
+        {
+            makeCalculation(str[i]);
+            i++;
+            continue ;
+        }
+        size_t number = str[i] - 48;
+        if (number > 9)
+            throw "Error";
+        Store.push(number);
+        i++;
+    }
+    if (Store.size() > 1)
+        throw "Error";
+    std::cout << Store.top() << std::endl;
 }
 
 int main(int ac, char **av)
