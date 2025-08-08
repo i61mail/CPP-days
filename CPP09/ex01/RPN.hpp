@@ -6,7 +6,7 @@
 class RPN
 {
     private:
-        std::stack<size_t> Store;
+        std::stack<long> Store;
     public:
         RPN();
         RPN(const RPN& obj);

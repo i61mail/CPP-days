@@ -4,23 +4,25 @@ void    RPN::makeCalculation(char op)
 {
     if (Store.size() < 2)
         throw "Error";
-    size_t a = Store.top();
+    long a = Store.top();
     Store.pop();
-    size_t b = Store.top();
+    long b = Store.top();
     Store.pop();
+    long maxInt = 2147483647;
+    long minInt = -2147483648;
 
     switch (op)
     {
-        case '+': Store.push(b + a); break;
-        case '-': Store.push(b - a); break;
-        case '/': Store.push(b / a); break;
-        case '*': Store.push(b * a); break; 
+        case '+': if (a + b > maxInt) throw "Error: Overflow"; Store.push(b + a); break;
+        case '-': if (a - b > maxInt || a - b < minInt) throw "Error: Overflow"; Store.push(b - a); break;
+        case '/': if (a == 0) throw "Error"; Store.push(b / a); break;
+        case '*': if (a * b > maxInt) throw "Error: Overflow"; Store.push(b * a); break; 
     }
 }
 
 void    RPN::processString(std::string str)
 {
-    size_t i = 0;
+    long i = 0;
     while (str[i])
     {
         if (!std::isdigit(str[i]) && str[i] != '/' && str[i] != '-' && str[i] != '+' && str[i] != '*' && !isspace(str[i]))
@@ -31,10 +33,10 @@ void    RPN::processString(std::string str)
         {
             makeCalculation(str[i]);
             i++;
-            continue ;
+            continue ;//0 1-
         }
-        size_t number = str[i] - 48;
-        if (number > 9)
+        long number = str[i] - 48;
+        if (number > 9 || number < 0)
             throw "Error";
         Store.push(number);
         i++;
