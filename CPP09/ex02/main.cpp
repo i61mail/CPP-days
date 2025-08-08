@@ -37,12 +37,13 @@ std::vector<int>    PmergeMe::devidePairs(std::vector<int> VStore, int One)
     // printV(mainVector, "mainVector:  ");
     // printV(pendVector, "pendVector:  ");
     VStore = devidePairs(mainVector, One);
-    // anched awal indice f kola recursion w an9leb 3la l pair dyalo
-    // w an insertih f l mainVector
-    
 
-
-
+    int firstMain = mainVector[0];
+    int firstPair = pendVector[0];
+    std::vector<int>::iterator it = std::find(VStore.begin(), VStore.end(), firstMain);
+    if (it != VStore.end())
+        VStore.insert(it, firstPair);
+    pendVector.erase(pendVector.begin());
     return VStore;
 }
 

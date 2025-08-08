@@ -4,6 +4,7 @@
 #include <vector>
 #include <deque>
 #include <cstdlib>
+#include <algorithm>
 
 class PmergeMe
 {
