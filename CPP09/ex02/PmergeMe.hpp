@@ -3,13 +3,12 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <cstdlib>
 
 class PmergeMe
 {
     private :
-        std::vector<int> VStore;
-        std::vector< std::pair<int, int> > PStore;
-        int             One;
+        
     public :
         PmergeMe();
         PmergeMe(const PmergeMe& obj);
@@ -17,8 +16,7 @@ class PmergeMe
         ~PmergeMe();
 
         void    checkString(int ac, char **av);
-        void    pairInts();
-        std::vector<int>     devidePairs();
-        void    printV();
-        void    print(std::vector<int> aa);
+        std::vector< std::pair<int, int> >     pairInts(std::vector<int> VStore, int &One);
+        std::vector<int>     devidePairs(std::vector<int> VStore, int One);
+        void    printV(std::vector<int> VStore, std::string str);
 };

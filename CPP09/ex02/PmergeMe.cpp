@@ -3,7 +3,6 @@
 PmergeMe::PmergeMe()
 {
     // std::cout << "Default constructor is called" << std::endl;
-    One = -1;
 }
 
 PmergeMe::PmergeMe(const PmergeMe& obj)
