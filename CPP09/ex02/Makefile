@@ -1,6 +1,6 @@
 CC = c++
 
-CFLAGS = -fsanitize=address -g -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 NAME = ./PmergeMe
 

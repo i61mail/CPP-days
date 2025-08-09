@@ -49,8 +49,6 @@ std::vector<int>    PmergeMe::devidePairs(std::vector<int> VStore, int One)
             }
         }
     }
-
-
     std::vector<int> jacob;
     int j1 = 0;
     int j2 = 1;
@@ -69,17 +67,17 @@ std::vector<int>    PmergeMe::devidePairs(std::vector<int> VStore, int One)
         int pos = jacob[i] - 1;
         if (alrinsert[pos] == false)
         {
-            int value = reorderedPend[pos];//hna
+            int value = reorderedPend[pos];
             std::vector<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
             VStore.insert(Lit, value);
             alrinsert[pos] = true;
         }
     }
-    for (size_t i = 0; i < reorderedPend.size(); i++) //hna
+    for (size_t i = 0; i < reorderedPend.size(); i++)
     {
         if (alrinsert[i] == false)
         {
-            int value = reorderedPend[i];//hna
+            int value = reorderedPend[i];
             std::vector<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
             VStore.insert(Lit, value);
         }
@@ -137,7 +135,7 @@ std::vector<int>    PmergeMe::checkString(int ac, char **av)
             throw "Error";
         VStore.push_back(number);
     }
-    // printV(VStore, "Before:  ");
+    printV(VStore, "Before:  ");
     return VStore;
 }
 
@@ -157,23 +155,29 @@ int main(int ac, char **av)
     {
         try
         {
-
-            // struct timeval start, end;
+            struct timeval start, end;
         
             std::vector<int> VStore = obj.checkString(ac, av);
-            // gettimeofday(&start);
+            gettimeofday(&start, NULL);
             VStore = obj.devidePairs(VStore, -1);
+            gettimeofday(&end, NULL);
+            double VTime = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
+            
+            obj.printV(VStore, "After:   ");
+            std::cout << "Time to process a range of " << VStore.size() << " elements with std::vector : "
+                      << VTime  << " us" << std::endl;
+
+            std::deque<int> DStore(VStore.begin(), VStore.end());
+            gettimeofday(&start, NULL);
+            DStore = obj.devidePairs(DStore, -1);
+            gettimeofday(&end, NULL);
+            double DTime = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
+            std::cout << "Time to process a range of " << DStore.size() << " elements with std::deque : "
+                      << DTime  << " us" << std::endl;
             // if (isSorted(VStore))
             //     std::cout << "true" << std::endl;
             // else
             //     std::cout << "false" << std::endl;
-            // obj.printV(VStore, "After:   ");
-            // gettimeofday(&end);
-            // size_t  time_elapsed = end - start;
-
-            // gettimeofday(&start);
-            // gettimeofday(&end);
-            // elapsed = end -start;
         }
         catch (const char *e)
         {
