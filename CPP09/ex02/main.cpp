@@ -24,26 +24,71 @@ std::vector<int>    PmergeMe::devidePairs(std::vector<int> VStore, int One)
             std::swap(VStore[0], VStore[1]);
         return VStore;
     }
+
     std::vector<int> mainVector;
     std::vector<int> pendVector;
     std::vector< std::pair<int, int> > makePair = pairInts(VStore, One);
-    std::vector< std::pair<int, int> >::iterator Pit = makePair.begin();
-    while (Pit != makePair.end())
+    size_t i = 0;
+    while (i < makePair.size())
     {
-        mainVector.push_back(Pit->first);
-        pendVector.push_back(Pit->second);
-        Pit++;
+        mainVector.push_back(makePair[i].first);
+        pendVector.push_back(makePair[i].second);
+        i++;
     }
-    // printV(mainVector, "mainVector:  ");
-    // printV(pendVector, "pendVector:  ");
-    VStore = devidePairs(mainVector, One);
+    VStore = devidePairs(mainVector, -1);
 
-    int firstMain = mainVector[0];
-    int firstPair = pendVector[0];
-    std::vector<int>::iterator it = std::find(VStore.begin(), VStore.end(), firstMain);
-    if (it != VStore.end())
-        VStore.insert(it, firstPair);
-    pendVector.erase(pendVector.begin());
+    std::vector<int> reorderedPend;
+    for (size_t i = 0; i < VStore.size(); i++)
+    {
+        for (size_t j = 0; j < mainVector.size(); j++)
+        {
+            if (mainVector[j] == VStore[i])
+            {
+                reorderedPend.push_back(pendVector[j]);
+                break;
+            }
+        }
+    }
+
+
+    std::vector<int> jacob;
+    int j1 = 0;
+    int j2 = 1;
+    int j = j2;
+    while (j < (int)reorderedPend.size())
+    {
+        jacob.push_back(j); 
+        int next = j2 + 2 * j1; 
+        j1 = j2;
+        j2 = next;
+        j = j2;
+    }
+    std::vector<bool> alrinsert(reorderedPend.size(), false);
+    for (size_t i = 0; i < jacob.size(); i++)
+    {
+        int pos = jacob[i] - 1;
+        if (alrinsert[pos] == false)
+        {
+            int value = reorderedPend[pos];//hna
+            std::vector<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
+            VStore.insert(Lit, value);
+            alrinsert[pos] = true;
+        }
+    }
+    for (size_t i = 0; i < reorderedPend.size(); i++) //hna
+    {
+        if (alrinsert[i] == false)
+        {
+            int value = reorderedPend[i];//hna
+            std::vector<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
+            VStore.insert(Lit, value);
+        }
+    }
+    if (One != -1)
+    {
+        std::vector<int>::iterator insertPos = std::lower_bound(VStore.begin(), VStore.end(), One);
+        VStore.insert(insertPos, One);
+    }
     return VStore;
 }
 
@@ -70,10 +115,9 @@ std::vector< std::pair<int, int> >     PmergeMe::pairInts(std::vector<int> VStor
     return PStore;
 }
 
-void    PmergeMe::checkString(int ac, char **av)
+std::vector<int>    PmergeMe::checkString(int ac, char **av)
 {
     std::vector<int> VStore;
-    int                 One = -1;
     for (int i = 1; i < ac; i++)
     {
         std::string str(av[i]);
@@ -93,9 +137,17 @@ void    PmergeMe::checkString(int ac, char **av)
             throw "Error";
         VStore.push_back(number);
     }
-    printV(VStore, "Before:  ");
-    std::vector<int> aa = devidePairs(VStore, One);
-    printV(aa, "After:   ");
+    // printV(VStore, "Before:  ");
+    return VStore;
+}
+
+bool isSorted(const std::vector<int>& vec) {
+    for (size_t i = 1; i < vec.size(); ++i) {
+        if (vec[i] < vec[i - 1]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 int main(int ac, char **av)
@@ -105,7 +157,23 @@ int main(int ac, char **av)
     {
         try
         {
-            obj.checkString(ac, av);
+
+            // struct timeval start, end;
+        
+            std::vector<int> VStore = obj.checkString(ac, av);
+            // gettimeofday(&start);
+            VStore = obj.devidePairs(VStore, -1);
+            // if (isSorted(VStore))
+            //     std::cout << "true" << std::endl;
+            // else
+            //     std::cout << "false" << std::endl;
+            // obj.printV(VStore, "After:   ");
+            // gettimeofday(&end);
+            // size_t  time_elapsed = end - start;
+
+            // gettimeofday(&start);
+            // gettimeofday(&end);
+            // elapsed = end -start;
         }
         catch (const char *e)
         {
