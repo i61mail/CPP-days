@@ -1,6 +1,6 @@
 CC = c++
 
-CFLAGS = -fsanitize=address -g -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 NAME = ./RPN
 

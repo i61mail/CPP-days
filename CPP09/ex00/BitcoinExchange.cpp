@@ -53,19 +53,18 @@ void    BitcoinExchange::checkLeap(int ymd)
 {
     if (ymd % 4 == 0)
     {
-        //* ila kan divisible b 100, -> not leap ila ida kan divisible b 400
         if (ymd % 100 == 0)
         {
             if (ymd % 400 == 0)
-                leapYear = true; //* divisible by 400 → leap
+                leapYear = true;
             else
-                leapYear = false; //* divisible by 100 but 400 la → not leap
+                leapYear = false;
         }
         else
-            leapYear = true;       //* divisible by 4 but 100 la → leap
+            leapYear = true;
     }
     else
-        leapYear = false; //* machi divisible b 4 → not leap
+        leapYear = false;
 }
 
 bool    BitcoinExchange::checkDay(int ymd)

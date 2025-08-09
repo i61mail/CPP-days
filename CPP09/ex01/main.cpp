@@ -70,6 +70,3 @@ int main(int ac, char **av)
         std::cerr << "Error" << std::endl;
     return 0;
 }
-
-//! the use for RPN is for like that instead of doing the parentesis,
-//! the operators can follow the numbers(3 + 5) * (7 - 2) would be written in RPN as: 3 5 + 7 2 -

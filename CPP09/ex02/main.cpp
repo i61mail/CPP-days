@@ -37,14 +37,14 @@ std::vector<int>    PmergeMe::devidePairs(std::vector<int> VStore, int One)
     }
     VStore = devidePairs(mainVector, -1);
 
-    std::vector<int> reorderedPend;
+    std::vector<int> reordPend;
     for (size_t i = 0; i < VStore.size(); i++)
     {
         for (size_t j = 0; j < mainVector.size(); j++)
         {
             if (mainVector[j] == VStore[i])
             {
-                reorderedPend.push_back(pendVector[j]);
+                reordPend.push_back(pendVector[j]);
                 break;
             }
         }
@@ -53,7 +53,7 @@ std::vector<int>    PmergeMe::devidePairs(std::vector<int> VStore, int One)
     int j1 = 0;
     int j2 = 1;
     int j = j2;
-    while (j < (int)reorderedPend.size())
+    while (j < (int)reordPend.size())
     {
         jacob.push_back(j); 
         int next = j2 + 2 * j1; 
@@ -61,23 +61,23 @@ std::vector<int>    PmergeMe::devidePairs(std::vector<int> VStore, int One)
         j2 = next;
         j = j2;
     }
-    std::vector<bool> alrinsert(reorderedPend.size(), false);
+    std::vector<bool> alrinsert(reordPend.size(), false);
     for (size_t i = 0; i < jacob.size(); i++)
     {
         int pos = jacob[i] - 1;
         if (alrinsert[pos] == false)
         {
-            int value = reorderedPend[pos];
+            int value = reordPend[pos];
             std::vector<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
             VStore.insert(Lit, value);
             alrinsert[pos] = true;
         }
     }
-    for (size_t i = 0; i < reorderedPend.size(); i++)
+    for (size_t i = 0; i < reordPend.size(); i++)
     {
         if (alrinsert[i] == false)
         {
-            int value = reorderedPend[i];
+            int value = reordPend[i];
             std::vector<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
             VStore.insert(Lit, value);
         }
@@ -139,15 +139,6 @@ std::vector<int>    PmergeMe::checkString(int ac, char **av)
     return VStore;
 }
 
-bool isSorted(const std::vector<int>& vec) {
-    for (size_t i = 1; i < vec.size(); ++i) {
-        if (vec[i] < vec[i - 1]) {
-            return false;
-        }
-    }
-    return true;
-}
-
 int main(int ac, char **av)
 {
     PmergeMe obj;
@@ -174,10 +165,6 @@ int main(int ac, char **av)
             double DTime = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
             std::cout << "Time to process a range of " << DStore.size() << " elements with std::deque : "
                       << DTime  << " us" << std::endl;
-            // if (isSorted(VStore))
-            //     std::cout << "true" << std::endl;
-            // else
-            //     std::cout << "false" << std::endl;
         }
         catch (const char *e)
         {

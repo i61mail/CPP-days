@@ -23,20 +23,20 @@ PmergeMe::~PmergeMe()
     // std::cout << "Destructor is called" << std::endl;
 }
 
-std::deque<int>    PmergeMe::devidePairs(std::deque<int> VStore, int One)
+std::deque<int>    PmergeMe::devidePairs(std::deque<int> DStore, int One)
 {
-    if (VStore.size() < 2)
-        return VStore;
-    else if (VStore.size() == 2)
+    if (DStore.size() < 2)
+        return DStore;
+    else if (DStore.size() == 2)
     {
-        if (VStore[0] > VStore[1])
-            std::swap(VStore[0], VStore[1]);
-        return VStore;
+        if (DStore[0] > DStore[1])
+            std::swap(DStore[0], DStore[1]);
+        return DStore;
     }
 
     std::deque<int> maindeque;
     std::deque<int> penddeque;
-    std::deque< std::pair<int, int> > makePair = pairInts(VStore, One);
+    std::deque< std::pair<int, int> > makePair = pairInts(DStore, One);
     size_t i = 0;
     while (i < makePair.size())
     {
@@ -44,16 +44,16 @@ std::deque<int>    PmergeMe::devidePairs(std::deque<int> VStore, int One)
         penddeque.push_back(makePair[i].second);
         i++;
     }
-    VStore = devidePairs(maindeque, -1);
+    DStore = devidePairs(maindeque, -1);
 
-    std::deque<int> reorderedPend;
-    for (size_t i = 0; i < VStore.size(); i++)
+    std::deque<int> reordPend;
+    for (size_t i = 0; i < DStore.size(); i++)
     {
         for (size_t j = 0; j < maindeque.size(); j++)
         {
-            if (maindeque[j] == VStore[i])
+            if (maindeque[j] == DStore[i])
             {
-                reorderedPend.push_back(penddeque[j]);
+                reordPend.push_back(penddeque[j]);
                 break;
             }
         }
@@ -62,7 +62,7 @@ std::deque<int>    PmergeMe::devidePairs(std::deque<int> VStore, int One)
     int j1 = 0;
     int j2 = 1;
     int j = j2;
-    while (j < (int)reorderedPend.size())
+    while (j < (int)reordPend.size())
     {
         jacob.push_back(j); 
         int next = j2 + 2 * j1; 
@@ -70,44 +70,44 @@ std::deque<int>    PmergeMe::devidePairs(std::deque<int> VStore, int One)
         j2 = next;
         j = j2;
     }
-    std::deque<bool> alrinsert(reorderedPend.size(), false);
+    std::deque<bool> alrinsert(reordPend.size(), false);
     for (size_t i = 0; i < jacob.size(); i++)
     {
         int pos = jacob[i] - 1;
         if (alrinsert[pos] == false)
         {
-            int value = reorderedPend[pos];
-            std::deque<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
-            VStore.insert(Lit, value);
+            int value = reordPend[pos];
+            std::deque<int>::iterator Lit = std::lower_bound(DStore.begin(), DStore.end(), value);
+            DStore.insert(Lit, value);
             alrinsert[pos] = true;
         }
     }
-    for (size_t i = 0; i < reorderedPend.size(); i++)
+    for (size_t i = 0; i < reordPend.size(); i++)
     {
         if (alrinsert[i] == false)
         {
-            int value = reorderedPend[i];
-            std::deque<int>::iterator Lit = std::lower_bound(VStore.begin(), VStore.end(), value);
-            VStore.insert(Lit, value);
+            int value = reordPend[i];
+            std::deque<int>::iterator Lit = std::lower_bound(DStore.begin(), DStore.end(), value);
+            DStore.insert(Lit, value);
         }
     }
     if (One != -1)
     {
-        std::deque<int>::iterator insertPos = std::lower_bound(VStore.begin(), VStore.end(), One);
-        VStore.insert(insertPos, One);
+        std::deque<int>::iterator insertPos = std::lower_bound(DStore.begin(), DStore.end(), One);
+        DStore.insert(insertPos, One);
     }
-    return VStore;
+    return DStore;
 }
 
-std::deque< std::pair<int, int> >     PmergeMe::pairInts(std::deque<int> VStore, int &One)
+std::deque< std::pair<int, int> >     PmergeMe::pairInts(std::deque<int> DStore, int &One)
 {
     std::deque< std::pair<int, int> > PStore;
-    std::deque<int>::iterator it = VStore.begin();
-    while (it != VStore.end())
+    std::deque<int>::iterator it = DStore.begin();
+    while (it != DStore.end())
     {
         int a = *it;
         it++;
-        if (it == VStore.end())
+        if (it == DStore.end())
         {
             One = a;
             return PStore;
