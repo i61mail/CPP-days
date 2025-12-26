@@ -75,7 +75,6 @@ Each day in this repository represents a step forward in mastering C++. The focu
 ## Compilation
 Each module contains Makefiles with the following rules:
 ```sh
-bashmake        # Compile the project
 make clean  # Remove object files
 make fclean # Remove object files and executable
 make re     # Recompile from scratch
